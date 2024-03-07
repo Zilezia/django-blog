@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+
+{% block body %}
+<h2>Search Results:</h2>
+<ul>
+    {% for result in results %} 
+    <div class="post-container">
+       <a href="{% url 'blog:post' result.id %}">
+            <h2>{{ result.title }}</h2>
+            <p>Lorem ipsum?</p>
+        </a>
+    </div>
+    {% endfor %}
+</ul>
+{% endblock %}

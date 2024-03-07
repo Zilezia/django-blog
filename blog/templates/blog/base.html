@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'blog/style.css' %}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar">
+		<div class="nav-lhs">
+            <h2 class="logo"><a href="{% url 'blog:index' %}">The Blog</a></h2>
+            <ul class="nav-links">
+                <li><a href="{% url 'blog:index' %}">Home</a></li>
+                <li><a href="{% url 'blog:about' %}">About</a></li>
+                <li><a href="{% url 'blog:contact' %}">Contact</a></li>
+            </ul>
+        </div>
+        <form class="search-form" action="{% url 'blog:search' %}" method="GET">
+            <input type="text" name="q" placeholder="Search...">
+            <button type="submit">Search</button>
+        </form>
+    </nav>
+
+    <main class="main-articles">
+        {% block body %}{% endblock %}
+    </main>
+
+    <footer id="bottom">
+        <p>Bottom of da page :"</p>
+    </footer>
+</body>
+</html>

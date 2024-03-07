@@ -17,3 +17,20 @@ class PostView(generic.DetailView):
     slug_field = 'slug'
     def get_queryset(self):
         return Post.objects.filter(pub_date__lte=timezone.now())
+
+class SearchView(generic.ListView):
+    model = Post
+    template_name = "blog/search_results.html"
+    context_object_name = "results"
+    def get_queryset(self):
+        query = self.request.GET.get('q', '')
+        if query:
+            return Post.objects.filter(title__icontains=query)
+        else:
+            return Post.objects.none()
+
+class AboutView(generic.DetailView):
+    template_name = "blog/about.html"
+
+class ContactView(generic.DetailView):
+    template_name = "blog/contact.html"
