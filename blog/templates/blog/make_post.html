@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+
+{% block body %}
+<h1>Make post</h1>
+<form class="make-form" action="" method="POST">
+    <fieldset>
+        {% csrf_token %}
+        <legend>Make Post</legend>
+
+        {{ form }}
+
+        <input type="submit" value="Post">
+
+    </fieldset>
+</form>
+{% endblock %}

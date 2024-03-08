@@ -1,9 +1,19 @@
 {% extends 'blog/base.html' %}
 
-{% block head %}
-
-{% endblock %}
-
 {% block body %}
+
+<article>
+    <div class="post-top">
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.author }}</p>
+        <p>{{ post.pub_date }}</p>
+    </div>
+    <p>{{ post.content }}</p>
+    <div class="post-bottom">
+        <p>{{ post.likes }} -- Like{{ post.likes|pluralize }}</p>
+        <p>{{ post.dislikes }} -- Dislike{{ post.dislikes|pluralize }}</p>
+        <p>{{ post.faves }} -- Favourite{{ post.faves|pluralize }}</p>
+    </div
+</article>
 
 {% endblock %}

@@ -3,29 +3,61 @@
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
-    color: black;
     list-style: none;
 }
 
+a {
+    color: black;
+}
+
 body {
+    color: black;
+}
+
+.temp-class {
+    margin: 1.5rem;
 }
 
 .navbar {
     width: 100%;
-    height: 5rem;
+    height: 4rem;
     background-color: #6CB4EE;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 1.2rem;
 }
-.nav-lhs {
+.navbar a {
+    margin-right: .5rem;
+}
+.nav-lhs, .nav-rhs {
     display: flex;
     flex-direction: row;
-    align-items: end;
+    align-items: flex-end;
 }
 .nav-links {
     display: flex;
     flex-direction: row;
 }
-.nav-links
+.main-block {
+    margin: 1.5rem 3rem;
+}
+#footer {
+    width: 100%;
+    min-height: 12rem;
+    background-color: #233142;
+    color: #f5f5f5;
+    position: fixed;
+    bottom: 0;
+}
+
+.posts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.post-container {
+    border: 1px solid black;
+   padding: 15px;
+}

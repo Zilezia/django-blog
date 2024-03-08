@@ -15,17 +15,20 @@
                 <li><a href="{% url 'blog:contact' %}">Contact</a></li>
             </ul>
         </div>
-        <form class="search-form" action="{% url 'blog:search' %}" method="GET">
-            <input type="text" name="q" placeholder="Search...">
-            <button type="submit">Search</button>
-        </form>
+        <div class="nav-rhs">
+            <a href="{% url 'blog:post' %}">Post</a>
+            <form class="search-form" action="{% url 'blog:search' %}" method="GET">
+                <input type="text" name="q" placeholder="Search...">
+                <button type="submit">Search</button>
+            </form>
+        </div>
     </nav>
 
-    <main class="main-articles">
+    <main id="content" class="main-block">
         {% block body %}{% endblock %}
     </main>
 
-    <footer id="bottom">
+    <footer id="footer">
         <p>Bottom of da page :"</p>
     </footer>
 </body>

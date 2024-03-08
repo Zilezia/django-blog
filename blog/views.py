@@ -1,20 +1,25 @@
 from django.utils import timezone
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import generic
 
 from blog.models import Post, Comment
+from blog.forms import PostForm
 
 class IndexView(generic.ListView):
     template_name = "blog/index.html"
     context_object_name = "latest_posts"
     def get_queryset(self):
         return Post.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
+    def get(self, request, *args, **kwargs):
+        if not request.path.endswith('/blog/'):
+            return redirect(reverse('blog:index'))
+        else:
+            return super().get(request, *args, **kwargs)
 
 class PostView(generic.DetailView):
     model = Post
     template_name = "blog/post.html"
-    slug_field = 'slug'
     def get_queryset(self):
         return Post.objects.filter(pub_date__lte=timezone.now())
 
@@ -29,8 +34,22 @@ class SearchView(generic.ListView):
         else:
             return Post.objects.none()
 
-class AboutView(generic.DetailView):
+class AboutView(generic.TemplateView):
     template_name = "blog/about.html"
 
-class ContactView(generic.DetailView):
+class ContactView(generic.TemplateView):
     template_name = "blog/contact.html"
+
+def make_a_post(request):
+    form = PostForm()
+
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.pub_date = timezone.now()
+            post.save()
+            return redirect('blog:index')
+
+    context = {'form': form}
+    return render(request, 'blog/make_post.html', context)

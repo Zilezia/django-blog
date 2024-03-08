@@ -6,17 +6,23 @@
 
 {% block body %}
 
+    <header class="temp-class">
+        <p>Some random div at the top, advertising or smth idk xd</p>
+    <form>
+        {{ form }}
+    </form>
+    </header>
     {% if latest_posts %}
-
+    <div class="posts-container">
       {% for post in latest_posts %}
-        <a href="{% url 'blog:post' post.id %}">
-            <div class="post-container">
+        <article class="post-container">
+            <a href="{% url 'blog:post' post.id %}">
                 <h2>{{ post.title }}</h2>
                 <p>Lorem ipsum?</p>
-            </div>
-        </a>
+            </a>
+        </article>
       {% endfor %}
-
+    </div>
     {% else %}
         <p>There are no blogs at the moment.</p>
     {% endif %}
