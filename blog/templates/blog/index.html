@@ -8,19 +8,22 @@
 
     <header class="temp-class">
         <p>Some random div at the top, advertising or smth idk xd</p>
-    <form>
-        {{ form }}
-    </form>
     </header>
+
     {% if latest_posts %}
     <div class="posts-container">
       {% for post in latest_posts %}
-        <article class="post-container">
-            <a href="{% url 'blog:post' post.id %}">
+        <a href="{% url 'blog:post' pk=post.pk slug=post.slug  %}">
+            <article class="post-container">
                 <h2>{{ post.title }}</h2>
-                <p>Lorem ipsum?</p>
-            </a>
-        </article>
+                <p>{{ post.author }}</p>
+                <form method="POST" action="{% url 'blog:index' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="post_id" value="{{ post.id }}">
+                    <input type="submit" value="Delete">
+                </form>
+            </article>
+        </a>
       {% endfor %}
     </div>
     {% else %}

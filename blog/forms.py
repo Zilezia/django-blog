@@ -1,7 +1,41 @@
-from django.forms import ModelForm
+from django import forms
 from .models import Post
 
-class PostForm(ModelForm):
+class PostForm(forms.ModelForm):
+    title   = forms.CharField(
+                    widget=forms.TextInput(
+                            attrs={
+                                "placeholder": "Post Title...",
+                            }
+                        )
+                    )
+    content = forms.CharField(
+                    widget=forms.Textarea(
+                            attrs={
+                                "placeholder": "",
+                                "class": "fcontent",
+                                "rows": 20,
+                            }
+                        )
+                    )
+    author  = forms.CharField(
+                    required=False,
+                    widget=forms.TextInput(
+                            attrs={
+                                "placeholder": "Name...",
+                            }
+                        )
+                    )
+
     class Meta:
         model = Post
-        fields = ["title", "content", "author"]
+        fields = [
+            "title", 
+            "content", 
+            "author",
+        ]
+    def clean_title(self, *args, **kwargs):
+        title = self.cleaned_data.get("title")
+        if not "CUM" in title:
+            raise forms.ValidationError("This is not a valid title")
+        return title
