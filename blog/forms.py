@@ -22,7 +22,7 @@ class PostForm(forms.ModelForm):
                     required=False,
                     widget=forms.TextInput(
                             attrs={
-                                "placeholder": "Name...",
+                                "placeholder": "",
                             }
                         )
                     )
@@ -36,6 +36,7 @@ class PostForm(forms.ModelForm):
         ]
     def clean_title(self, *args, **kwargs):
         title = self.cleaned_data.get("title")
-        if not "CUM" in title:
-            raise forms.ValidationError("This is not a valid title")
+#        if "kurwa" in title:
+#            raise forms.ValidationError("This is not a valid title")
         return title
+

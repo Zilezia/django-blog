@@ -2,17 +2,16 @@
 
 {% block body %}
 
-<article>
+<article id="post-post">
     <div class="post-top">
-        <h1>{{ post.title }}</h1>
-        <p>{{ post.author }}</p>
-        <p>{{ post.pub_date }}</p>
+        <h1 class="ptitle">{{ post.title }}</h1>
+        <p class="pauthor">{{ post.author }}</p>
+        <p class="ppd">{{ post.pub_date }}</p>
     </div>
-    <p>{{ post.content }}</p>
+    <p class="pcontent">{{ post.content }}</p>
     <div class="post-bottom">
-        <p>{{ post.likes }} -- Like{{ post.likes|pluralize }}</p>
-        <p>{{ post.dislikes }} -- Dislike{{ post.dislikes|pluralize }}</p>
-        <p>{{ post.faves }} -- Favourite{{ post.faves|pluralize }}</p>
+        <p class="prating">{{ post.rating }} -- Rating</p>
+        <p class="pfaves">{{ post.faves }} -- Favourite{{ post.faves|pluralize }}</p>
     </div
 </article>
 

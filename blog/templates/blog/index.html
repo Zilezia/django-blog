@@ -15,9 +15,16 @@
       {% for post in latest_posts %}
         <a href="{% url 'blog:post' pk=post.pk slug=post.slug  %}">
             <article class="post-container">
-                <h2>{{ post.title }}</h2>
+                <div>
+                    <h2>{{ post.title }}</h2>
+                    <p>{{ post.index_fpd }}</p>
+                </div>
                 <p>{{ post.author }}</p>
-                <form method="POST" action="{% url 'blog:index' %}">
+                <div>
+                    <p>{{ post.rating }} -- Rating</p>
+                    <p>{{ post.faves }}  -- Favourite{{ post.faves|pluralize }}</p>
+                </div>
+                <form method="POST" action="{% url 'blog:home' %}">
                     {% csrf_token %}
                     <input type="hidden" name="post_id" value="{{ post.id }}">
                     <input type="submit" value="Delete">
@@ -27,7 +34,7 @@
       {% endfor %}
     </div>
     {% else %}
-        <p>There are no blogs at the moment.</p>
+        <p>There are no posts, go make one!</p>
     {% endif %}
 
 {% endblock %}

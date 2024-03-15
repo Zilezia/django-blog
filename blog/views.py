@@ -4,7 +4,7 @@ from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.http import HttpResponseRedirect
 
-from blog.models import Post, Comment
+from blog.models import Post
 from blog.forms import PostForm
 
 class IndexView(generic.ListView):
@@ -15,7 +15,7 @@ class IndexView(generic.ListView):
         return Post.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
     def get(self, request, *args, **kwargs):
         if not request.path.endswith('/blog/'):
-            return redirect(reverse_lazy('blog:index'))
+            return redirect(reverse_lazy('blog:home'))
         else:
             return render(request, self.template_name, {'latest_posts': self.get_queryset()})
     def post(self, request, *args, **kwargs):
@@ -23,7 +23,7 @@ class IndexView(generic.ListView):
         if post_id:
             post_to_delete = get_object_or_404(Post, id=post_id)
             post_to_delete.delete()
-        return redirect(reverse_lazy('blog:index'))
+        return redirect(reverse_lazy('blog:home'))
     
 
 class PostView(generic.DetailView):
@@ -59,6 +59,7 @@ def make_a_post(request):
         post = form.save(commit=False)
         post.pub_date = timezone.now()
         post.save()
+        return redirect(reverse_lazy('blog:home'))
 
     context = {'form': form}
     return render(request, 'blog/make_post.html', context)

@@ -61,3 +61,23 @@ body {
     border: 1px solid black;
    padding: 15px;
 }
+
+/* A post */
+
+#post-post{
+    width: 100%;
+    
+}
+
+.post-top, .post-bottom{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 1rem;
+}
+
+.pcontent{
+    inline-size: 100%;
+    overflow-wrap: break-word;
+    hyphens: manual;
+}

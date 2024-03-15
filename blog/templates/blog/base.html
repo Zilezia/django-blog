@@ -8,11 +8,12 @@
 <body>
     <nav class="navbar">
 		<div class="nav-lhs">
-            <h2 class="logo"><a href="{% url 'blog:index' %}">The Blog</a></h2>
+            <h2 class="logo"><a href="{% url 'blog:home' %}">The Blog</a></h2>
             <ul class="nav-links">
-                <li><a href="{% url 'blog:index' %}">Home</a></li>
+                <li><a href="{% url 'blog:home' %}">Home</a></li>
                 <li><a href="{% url 'blog:about' %}">About</a></li>
                 <li><a href="{% url 'blog:contact' %}">Contact</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
             </ul>
         </div>
         <div class="nav-rhs">
@@ -24,7 +25,12 @@
         </div>
     </nav>
 
-    <main id="content" class="main-block">
+    <main id="container" class="main-block">
+        {% if messages %}
+          {% for message in messages%}
+            {{ message }}
+          {% endfor %}
+        {% endif %}
         {% block body %}{% endblock %}
     </main>
 
